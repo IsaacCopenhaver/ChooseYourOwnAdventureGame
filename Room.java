@@ -3,12 +3,16 @@ import java.util.HashMap;
 public class Room {
     private String name;
     private String description;
-    public HashMap<String, Item> itemList = new HashMap<>();
-    public HashMap<String, Room> links = new HashMap<>();
+    private HashMap<String, Item> itemList = new HashMap<>();
+    private HashMap<String, Room> links = new HashMap<>();
 
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public boolean hasItem(String itemName) {
+        return itemList.containsKey(itemName);
     }
 
     public void addItem(Item item) {
@@ -58,5 +62,9 @@ public class Room {
 
     public Room getLinkedRoom(String direction) {
         return links.get(direction);
+    }
+
+    public Item getItem(String name) {
+        return itemList.get(name);
     }
 }

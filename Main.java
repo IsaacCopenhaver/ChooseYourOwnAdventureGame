@@ -2,9 +2,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // we call the "Room" the CLASS or template
-        // and we call kitchen and livingroom the
-        // instances of the class (or "OBJECTS")
 
         Room kitchen = new Room("Kitchen", "A dank and dirty room buzzing with flies.");
 
@@ -26,7 +23,8 @@ public class Main {
         p1.setLocation(kitchen);
 
         Scanner in = new Scanner(System.in);
-        kitchen.itemList.put("key", new Item("key", "A small key.", 0, false, false, false, true, false));
+        kitchen.addItem(new Item("key", "A small key.", 1));
+        kitchen.addItem(new Weapon("sword", "A sharp sword.", 10, 10));
         // "game loop"
         while (true) {
             // print location info
@@ -45,8 +43,8 @@ public class Main {
                 }
             } else if (command.equals("pickup")) {
                 String itemName = in.next();
-                if (p1.getLocation().itemList.containsKey(itemName)) {
-                    p1.pickUpItem(p1.getLocation().itemList.get(itemName));
+                if (p1.getLocation().hasItem(itemName)) {
+                    p1.pickUpItem(p1.getLocation().getItem(itemName));
                     System.out.println("You picked up the " + itemName);
                 } else {
                     System.out.println("No such item.");
